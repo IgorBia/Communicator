@@ -26,12 +26,9 @@ class Application(tk.Frame):
         self.entry_widget1 = tk.Entry(self)
         self.entry_widget1.insert(0, "")
         self.entry_widget1.pack(side="bottom")
-        #self.background_image=tk.PhotoImage('home/igor/Obrazy/index.gif')
-        #self.background_label = tk.Label(master=root, image=self.background_image)
-        #self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
-        self.quit = tk.Button(self, text="SEND", fg="blue",
+        self.send = tk.Button(self, text="SEND", fg="blue",
                               command=self.send)
-        self.quit.pack(side="top")
+        self.send.pack(side="top")
 
     def connectToServer(self):
         self.sock.connect(self.server_address)
