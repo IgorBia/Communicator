@@ -1,0 +1,42 @@
+import tkinter as tk
+import socket
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.server_address = ('', 12345)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.pack()
+        self.config()
+        self.create_widgets()
+        self.connectToServer()
+
+    def config(self):
+        root.minsize(768,432)
+        root.geometry("768x432")
+
+    def send(self):
+        self.message = str(self.entry_widget1.get())
+        self.messagee = self.message.encode()
+        self.sock.sendall(self.messagee)
+        self.entry_widget1.delete(0, 'end')
+        self.entry_widget1.insert(0, "")
+
+    def create_widgets(self):
+        self.entry_widget1 = tk.Entry(self)
+        self.entry_widget1.insert(0, "")
+        self.entry_widget1.pack(side="bottom")
+        #self.background_image=tk.PhotoImage('home/igor/Obrazy/index.gif')
+        #self.background_label = tk.Label(master=root, image=self.background_image)
+        #self.background_label.place(x=0, y=0, relwidth=1, relheight=1)
+        self.quit = tk.Button(self, text="SEND", fg="blue",
+                              command=self.send)
+        self.quit.pack(side="top")
+
+    def connectToServer(self):
+        self.sock.connect(self.server_address)
+        print("connected")
+
+root = tk.Tk()
+app = Application(master=root)
+app.mainloop()
