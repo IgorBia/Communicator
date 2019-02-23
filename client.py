@@ -13,26 +13,26 @@ class Application(tk.Frame):
 
     def config(self):
         root.minsize(768,432)
-        root.geometry("768x432")
+        root.geometry('768x432')
 
     def send(self):
         self.message = str(self.entry_widget1.get())
-        self.messagee = self.message.encode()
-        self.sock.sendall(self.messagee)
+        self.message = self.message.encode() + '\n'.encode()
+        self.sock.sendall(self.message)
         self.entry_widget1.delete(0, 'end')
-        self.entry_widget1.insert(0, "")
+        self.entry_widget1.insert(0, '')
 
     def create_widgets(self):
         self.entry_widget1 = tk.Entry(self)
-        self.entry_widget1.insert(0, "")
-        self.entry_widget1.pack(side="bottom")
-        self.send = tk.Button(self, text="SEND", fg="blue",
+        self.entry_widget1.insert(0, '')
+        self.entry_widget1.pack(side='bottom')
+        self.send = tk.Button(self, text='SEND', fg='blue',
                               command=self.send)
-        self.send.pack(side="top")
+        self.send.pack(side='top')
 
     def connectToServer(self):
         self.sock.connect(self.server_address)
-        print("connected")
+        print('connected')
 
 root = tk.Tk()
 app = Application(master=root)
